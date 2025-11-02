@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Avengers : Endgame",
+    "desc": "With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and restore balance to the universe.",
+    "posterUrl": "../assets/banner/muado.jpg",
+    "videoUrl": "../assets/video/muado.mp4"
+  },
+  {
+    "id": 2,
+    "title": "Spider-Man : No Way Home",
+    "desc": "Peter Parker’s identity is revealed, bringing his superhero responsibilities into conflict with his everyday life.",
+    "posterUrl": "../assets/banner/spidermannowayhome.jpg",
+    "videoUrl": "../assets/video/spidermannowayhome.mp4"
+  },
+  {
+    "id": 3,
+    "title": "Black Panther : Wakanda Forever",
+    "desc": "The people of Wakanda fight to protect their home from intervening world powers as they mourn the loss of King T’Challa.",
+    "posterUrl": "../assets/banner/blackpanther.jpg",
+    "videoUrl": "../assets/video/video-blackpanther.mp4"
+  }
+]

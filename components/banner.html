@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StreamVibe Banner</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      /* CSS GIỮ NGUYÊN */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0d0d0d;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .banner {
+        position: relative;
+        width: 100%;
+        height: 56.25vw;
+        max-height: 550px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      .banner-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+        background: #000;
+      }
+
+      .banner-slide.active {
+        opacity: 1;
+        z-index: 2;
+      }
+
+      .banner-slide video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .banner-content {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        width: 90%;
+        z-index: 3;
+        animation: fadeInUp 0.8s ease;
+        /* === XÓA 'transition' Ở ĐÂY === */
+      }
+
+      /* === (KHÔNG CẦN CLASS .content-hidden ở đây) === */
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 30px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      .banner h2 {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        /* === THÊM 'transition' VÀO ĐÂY === */
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      }
+
+      .banner p {
+        font-size: 15px;
+        color: #d3d3d3;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto 18px;
+        /* === THÊM 'transition' VÀO ĐÂY === */
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      }
+
+      /* === THAY ĐỔI CSS TẠI ĐÂY === */
+      /* Chỉ ẩn h2 và p khi .banner-content có class .content-hidden */
+      .banner-content.content-hidden h2,
+      .banner-content.content-hidden p {
+        opacity: 0;
+        visibility: hidden;
+      }
+      /* ======================== */
+
+      .banner-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        /* === THÊM 'transition' VÀO ĐÂY === */
+        /* Giúp nút bấm mượt hơn khi h2/p biến mất */
+        transition: transform 0.5s ease-out;
+      }
+
+      /* (Tùy chọn): Bạn có thể thêm dòng này để đẩy nút lên 1 chút khi chữ biến mất */
+      .banner-content.content-hidden .banner-buttons {
+        transform: translateY(80px);
+      }
+
+      .btn-play {
+        background-color: #e50914;
+        color: #fff;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .btn-play:hover {
+        background-color: #f40612;
+      }
+
+      .icon-btn {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border: none;
+        width: 38px;
+        height: 38px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .icon-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .nav-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 6px;
+        cursor: pointer;
+        z-index: 4;
+        transition: 0.3s;
+      }
+
+      .nav-arrow:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .nav-left {
+        left: 15px;
+      }
+
+      .nav-right {
+        right: 15px;
+      }
+
+      .dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 4;
+      }
+
+      .dot {
+        width: 20px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        transition: 0.3s;
+      }
+
+      .dot.active {
+        background: #e50914;
+        width: 25px;
+      }
+
+      @media (max-width: 992px) {
+        .banner h2 {
+          font-size: 26px;
+        }
+        .banner p {
+          font-size: 14px;
+          max-width: 600px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .banner-content {
+          bottom: 30px;
+          width: 90%;
+        }
+        .banner h2 {
+          font-size: 24px;
+          margin-bottom: 15px;
+        }
+        .banner p {
+          display: none;
+        }
+        .nav-arrow,
+        .dots {
+          display: none;
+        }
+
+        /* Cập nhật cho mobile: Chỉ ẩn h2 (vì p đã ẩn sẵn) */
+        .banner-content.content-hidden h2 {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="banner">
+      <div class="banner-content">
+        <h2 id="bannerTitle"></h2>
+        <p id="bannerDesc"></p>
+        <div class="banner-buttons">
+          <button class="btn-play">
+            <i class="fa-solid fa-play"></i> Play Now
+          </button>
+          <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+          <button class="icon-btn">
+            <i class="fa-solid fa-thumbs-up"></i>
+          </button>
+          <button class="icon-btn" id="volume-btn">
+            <i class="fa-solid fa-volume-xmark" id="volume-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="nav-arrow nav-left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="nav-arrow nav-right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="dots"></div>
+    </div>
+
+    <script>
+      // === JAVASCRIPT GIỮ NGUYÊN ===
+      // Logic JS của bạn vẫn đúng,
+      // nó thêm/xóa class '.content-hidden' vào '.banner-content'.
+      // CSS mới sẽ xử lý việc chỉ ẩn h2/p.
+
+      const POSTER_DELAY_MS = 3000;
+      const AUTOSLIDE_INTERVAL_MS = 20000;
+
+      const titleEl = document.getElementById("bannerTitle");
+      const descEl = document.getElementById("bannerDesc");
+      const volumeIcon = document.getElementById("volume-icon");
+      const bannerContainer = document.querySelector(".banner");
+      const dotsContainer = document.querySelector(".dots");
+      const contentEl = document.querySelector(".banner-content");
+
+      let current = 0;
+      let allBanners = [];
+      let slides = [];
+      let videos = [];
+      let dots = [];
+      let activeVideoTimeout = null;
+      let autoSlideTimeout = null;
+      let isGloballyMuted = true;
+
+      function updateSlide(index) {
+        if (activeVideoTimeout) {
+          clearTimeout(activeVideoTimeout);
+          activeVideoTimeout = null;
+        }
+        if (autoSlideTimeout) {
+          clearTimeout(autoSlideTimeout);
+        }
+
+        const bannerData = allBanners[index];
+        titleEl.textContent = bannerData.title;
+        descEl.textContent = bannerData.desc;
+
+        slides.forEach((s, i) => s.classList.toggle("active", i === index));
+        dots.forEach((d, i) => d.classList.toggle("active", i === index));
+
+        contentEl.classList.remove("content-hidden");
+
+        videos.forEach((video, i) => {
+          video.pause();
+          video.load();
+          video.muted = isGloballyMuted;
+
+          if (i === index) {
+            activeVideoTimeout = setTimeout(() => {
+              video.play();
+              contentEl.classList.add("content-hidden");
+            }, POSTER_DELAY_MS);
+          }
+        });
+
+        startAutoSlide();
+      }
+
+      function startAutoSlide() {
+        if (autoSlideTimeout) {
+          clearTimeout(autoSlideTimeout);
+        }
+        autoSlideTimeout = setTimeout(() => {
+          current = (current + 1) % allBanners.length;
+          updateSlide(current);
+        }, AUTOSLIDE_INTERVAL_MS);
+      }
+
+      function buildBannerUI() {
+        const slideFragment = new DocumentFragment();
+        const dotFragment = new DocumentFragment();
+
+        allBanners.forEach((bannerData) => {
+          const slide = document.createElement("div");
+          slide.className = "banner-slide";
+
+          const video = document.createElement("video");
+          video.src = bannerData.videoUrl;
+          video.poster = bannerData.posterUrl;
+          video.muted = true;
+          video.loop = true;
+          video.playsinline = true;
+
+          slide.appendChild(video);
+          slideFragment.appendChild(slide);
+
+          const dot = document.createElement("div");
+          dot.className = "dot";
+          dotFragment.appendChild(dot);
+        });
+
+        bannerContainer.insertBefore(
+          slideFragment,
+          document.querySelector(".banner-content")
+        );
+        dotsContainer.appendChild(dotFragment);
+
+        slides = document.querySelectorAll(".banner-slide");
+        videos = document.querySelectorAll(".banner-slide video");
+        dots = document.querySelectorAll(".dot");
+      }
+
+      function updateVolumeIcon() {
+        if (isGloballyMuted) {
+          volumeIcon.classList.remove("fa-volume-high");
+          volumeIcon.classList.add("fa-volume-xmark");
+        } else {
+          volumeIcon.classList.remove("fa-volume-xmark");
+          volumeIcon.classList.add("fa-volume-high");
+        }
+      }
+
+      function registerEventListeners() {
+        document.querySelector(".nav-left").onclick = () => {
+          current = (current - 1 + allBanners.length) % allBanners.length;
+          updateSlide(current);
+        };
+
+        document.querySelector(".nav-right").onclick = () => {
+          current = (current + 1) % allBanners.length;
+          updateSlide(current);
+        };
+
+        document.getElementById("volume-btn").onclick = () => {
+          isGloballyMuted = !isGloballyMuted;
+          videos.forEach((video) => {
+            video.muted = isGloballyMuted;
+          });
+          updateVolumeIcon();
+        };
+      }
+
+      // === 3. KHỞI CHẠY ===
+      fetch("../data/moviebanner.json")
+        .then((response) => response.json())
+        .then((data) => {
+          allBanners = data;
+          buildBannerUI();
+          registerEventListeners();
+          updateSlide(0);
+        })
+        .catch((error) => {
+          console.error("Lỗi tải file moviebanner.json:", error);
+          bannerContainer.innerHTML = `<h2 style="text-align: center; padding: 50px;">Lỗi tải dữ liệu banner.</h2>`;
+        });
+    </script>
+  </body>
+</html>

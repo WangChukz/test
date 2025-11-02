@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOVIE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      /* CSS CỦA BẠN GIỮ NGUYÊN - KHÔNG THAY ĐỔI */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #0d0d0d;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 50px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .header-top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .logo span {
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      nav.menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #121212;
+        border: 1px solid #222;
+        border-radius: 12px;
+        padding: 6px;
+        gap: 8px;
+        transition: all 0.3s ease;
+      }
+
+      nav.menu a {
+        text-decoration: none;
+        color: #bdbdbd;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 10px 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      nav.menu a:hover,
+      nav.menu a.active {
+        background-color: #1f1f1f;
+        color: #fff;
+        box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.08);
+      }
+
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+      }
+
+      .icons .icon-btn {
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
+        position: relative;
+      }
+
+      .icon-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.1);
+      }
+
+      .icon-btn i {
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .search-box {
+        width: 100%;
+        margin-top: 10px;
+        background: rgba(20, 20, 20, 0.95);
+        border: 1px solid #333;
+        border-radius: 10px;
+        display: none;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        transition: all 0.3s ease;
+      }
+
+      .search-box.open {
+        display: flex;
+      }
+
+      .search-box input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-size: 14px;
+        width: 100%;
+      }
+
+      .profile {
+        position: relative;
+      }
+
+      .profile-dropdown {
+        position: absolute;
+        top: 45px;
+        right: 0;
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 10px;
+        padding: 10px 0;
+        width: 150px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+      }
+
+      .profile-dropdown.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .profile-dropdown a {
+        display: block;
+        padding: 10px 15px;
+        margin: 0px 10px;
+        color: #ccc;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+        text-align: center;
+      }
+
+      .profile-dropdown a:hover {
+        background: #2a2a2a;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.08);
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 500;
+      }
+
+      .overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background-color: rgba(252, 251, 251, 0.08);
+        padding: 10px;
+        border-radius: 50px;
+      }
+
+      .hamburger span {
+        width: 18px;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-menu {
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: #0d0d0d;
+        width: 100%;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 0 20px;
+      }
+
+      .mobile-menu.open {
+        max-height: 400px;
+        opacity: 1;
+        padding: 20px;
+      }
+
+      .mobile-menu a {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 15px;
+        background: #1a1a1a;
+        padding: 10px 15px;
+        border-radius: 8px;
+        width: 90%;
+        text-align: center;
+        transition: 0.3s;
+      }
+
+      .mobile-menu a:hover {
+        background: #2a2a2a;
+        color: #fff;
+      }
+
+      .mobile-menu .login-btn {
+        font-weight: 600;
+        background: #313562;
+        margin-top: auto;
+      }
+
+      @media (max-width: 950px) {
+        .header-top nav.menu,
+        .profile {
+          display: none;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        header {
+          padding: 15px 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-top">
+        <div class="logo">
+          <img src="../assets/logo/logo.png" alt="logo" />
+          <span>MOVIE</span>
+        </div>
+
+        <nav class="menu" id="menu">
+          <a href="#" class="active">Home</a>
+          <a href="#">Movies & Shows</a>
+          <a href="#">Support</a>
+          <a href="#">Subscriptions</a>
+        </nav>
+
+        <div class="icons">
+          <div class="icon-btn" id="searchBtn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+
+          <div class="icon-btn">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+
+          <div class="profile">
+            <div class="icon-btn" id="profileBtn">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="profile-dropdown" id="profileDropdown">
+              <a href="#">Đăng nhập</a>
+              <a href="#">Đăng ký</a>
+            </div>
+          </div>
+
+          <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-box" id="searchBox">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Tìm kiếm phim..." />
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#">Home</a>
+        <a href="#">Movies & Shows</a>
+        <a href="#">Support</a>
+        <a href="#">Subscriptions</a>
+        <a href="#" class="login-btn">Đăng nhập</a>
+      </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+      // === JAVASCRIPT ĐÃ ĐƯỢC CẬP NHẬT ===
+
+      const searchBtn = document.getElementById("searchBtn");
+      const searchBox = document.getElementById("searchBox");
+      const profileBtn = document.getElementById("profileBtn");
+      const profileDropdown = document.getElementById("profileDropdown");
+      const overlay = document.getElementById("overlay");
+      const input = searchBox.querySelector("input");
+      const menuLinks = document.querySelectorAll("#menu a");
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      // === BẮT ĐẦU THAY ĐỔI ===
+
+      // Hàm trợ giúp để reset icon hamburger
+      function resetHamburgerStyles() {
+        hamburger.classList.remove("active");
+        const spans = hamburger.querySelectorAll("span");
+        spans.forEach((s) => {
+          s.style.transform = "";
+          s.style.opacity = "1";
+        });
+      }
+
+      // Hàm trợ giúp để quản lý overlay
+      function updateOverlay() {
+        if (
+          profileDropdown.classList.contains("open") ||
+          searchBox.classList.contains("open") ||
+          mobileMenu.classList.contains("open")
+        ) {
+          overlay.classList.add("show");
+        } else {
+          overlay.classList.remove("show");
+        }
+      }
+
+      // === KẾT THÚC THAY ĐỔI ===
+
+      // Active menu
+      menuLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          menuLinks.forEach((item) => item.classList.remove("active"));
+          link.classList.add("active");
+        });
+      });
+
+      // Toggle search (Đã cập nhật)
+      searchBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = searchBox.classList.contains("open");
+
+        // Đóng các cửa sổ khác
+        profileDropdown.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        resetHamburgerStyles();
+
+        // Toggle (bật/tắt) chính nó
+        if (isOpen) {
+          searchBox.classList.remove("open");
+        } else {
+          searchBox.classList.add("open");
+          input.focus();
+        }
+
+        updateOverlay(); // Cập nhật overlay
+      });
+
+      // Toggle profile dropdown (Đã cập nhật)
+      profileBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        // Đóng các cửa sổ khác
+        searchBox.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        resetHamburgerStyles();
+
+        // Toggle chính nó
+        profileDropdown.classList.toggle("open");
+
+        updateOverlay(); // Cập nhật overlay
+      });
+
+      // Toggle hamburger (Đã cập nhật)
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        // Đóng các cửa sổ khác
+        searchBox.classList.remove("open");
+        profileDropdown.classList.remove("open");
+
+        // Toggle chính nó
+        hamburger.classList.toggle("active");
+        mobileMenu.classList.toggle("open");
+
+        // Cập nhật animation
+        const spans = hamburger.querySelectorAll("span");
+        if (hamburger.classList.contains("active")) {
+          spans[0].style.transform =
+            "rotate(45deg) translateY(6px) translateX(7px)";
+          spans[1].style.opacity = "0";
+          spans[2].style.transform =
+            "rotate(-45deg) translateY(-3px) translateX(4px)";
+        } else {
+          resetHamburgerStyles(); // Dùng hàm trợ giúp
+        }
+
+        updateOverlay(); // Cập nhật overlay
+      });
+
+      // Overlay click (Đã cập nhật)
+      overlay.addEventListener("click", () => {
+        profileDropdown.classList.remove("open");
+        searchBox.classList.remove("open");
+        mobileMenu.classList.remove("open");
+        overlay.classList.remove("show");
+        resetHamburgerStyles(); // Dùng hàm trợ giúp
+      });
+    </script>
+  </body>
+</html>
