@@ -3,11 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang chủ</title>
+    <title>StreamVibe - The Best Streaming Experience</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: url("assets/logo/background.png") no-repeat center
+          center/cover;
+        color: #fff;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* lớp phủ làm tối ảnh */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2); 
+        z-index: 1;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        position: relative;
+        z-index: 2;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      /* hiệu ứng đổ bóng chữ */
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #fff;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7),
+          0 0 30px rgba(229, 9, 20, 0.3); /* viền sáng đỏ nhẹ */
+      }
+
+      .hero p {
+        color: #e0e0e0;
+        max-width: 700px;
+        margin-bottom: 35px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      }
+
+      .btn-start {
+        background-color: #e50914;
+        border: none;
+        color: #fff;
+        padding: 14px 36px;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        transition: 0.3s;
+        box-shadow: 0 0 25px rgba(229, 9, 20, 0.4);
+      }
+
+      .btn-start:hover {
+        background-color: #b00610;
+        transform: scale(1.08);
+        box-shadow: 0 0 35px rgba(229, 9, 20, 0.7);
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+        .hero p {
+          font-size: 0.95rem;
+        }
+      }
+
+      /* hiệu ứng fade-in */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./scripts/loadBanner.js"></script>
-    <script src="./scripts/loadHeaderFooter.js"></script>
+    <section class="hero">
+      <h1>Trải nghiệm phát trực tuyến tốt nhất</h1>
+      <p>
+        MovieStreaming là trải nghiệm phát trực tuyến tuyệt vời nhất để xem phim và
+        chương trình yêu thích theo yêu cầu, mọi lúc, mọi nơi. Tận hưởng nội
+        dung đa dạng — phim bom tấn, chương trình kinh điển và phim độc quyền.
+      </p>
+      <a href="trangchu.html"><button class="btn-start">Khám phá ngay</button></a>
+    </section>
   </body>
 </html>

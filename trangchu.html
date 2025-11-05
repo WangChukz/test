@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css">
+    <style>
+      body {
+        background-color: #111;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      h2 {
+        margin: 20px 0 10px;
+      }
+
+      .carousel {
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .movie-list {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 15px;
+        padding: 10px 0;
+      }
+
+      .movie-card {
+        background: #1c1c1c;
+        border-radius: 12px;
+        flex: 0 0 200px;
+        text-align: center;
+        padding: 10px;
+        transition: transform 0.3s;
+      }
+
+      .movie-card:hover {
+        transform: scale(1.05);
+      }
+
+      .movie-card img {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      .movie-card p {
+        font-size: 14px;
+        color: #aaa;
+        margin: 5px 0;
+      }
+
+      .nav {
+        background: #222;
+        color: white;
+        border: none;
+        font-size: 22px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .nav:hover {
+        background: #444;
+      }
+
+      .nav.prev {
+        position: absolute;
+        left: -10px;
+        z-index: 2;
+      }
+
+      .nav.next {
+        position: absolute;
+        right: -10px;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="banner-fade"></div>
+
+      <div class="banner-content">
+        <h2 id="bannerTitle"></h2>
+        <p id="bannerDesc"></p>
+        <div class="banner-buttons">
+          <button class="btn-play">
+            <i class="fa-solid fa-play"></i> Xem Ngay
+          </button>
+          <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+          <button class="icon-btn" id="like-btn">
+            <i class="fa-solid fa-thumbs-up"></i>
+          </button>
+          <button class="icon-btn" id="volume-btn">
+            <i class="fa-solid fa-volume-xmark" id="volume-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="nav-arrow nav-left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="nav-arrow nav-right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <div class="dots"></div>
+    </div>
+
+    <!-- //-----------------------KHUNG CHƯA PHIM-----------------------// -->
+    <div class="container">
+      <h2>Phim Sắp Chiếu</h2>
+      <div class="carousel">
+        <button class="nav prev">←</button>
+        <div class="movie-list" id="upcoming"></div>
+        <button class="nav next">→</button>
+      </div>
+      <h2>Phim Mới Ra</h2>
+      <div class="carousel">
+        <button class="nav prev">←</button>
+        <div class="movie-list" id="now_playing"></div>
+        <button class="nav next">→</button>
+      </div>
+    </div>
+    <script src="scripts/movie.js"></script>
+    <script src="../scripts/banner.js"></script>
+    <div class="khungchuaphim"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./scripts/loadBanner.js"></script>
+    <script src="./scripts/loadHeaderFooter.js"></script>
+  </body>
+</html>

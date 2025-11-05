@@ -1,0 +1,253 @@
+/* CSS GIỮ NGUYÊN */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 56.25vw;
+  max-height: 550px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.banner-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  background: #000;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  z-index: 2; /* Video nằm ở z-index: 2 */
+}
+
+.banner-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* === THÊM KHỐI NÀY ĐỂ TẠO LỚP PHỦ MỜ === */
+.banner-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px; /* Chiều cao của vùng mờ, bạn có thể chỉnh */
+  /* Dải màu từ trong suốt ở trên sang màu nền body ở dưới */
+  background: linear-gradient(
+    to top,
+    #0d0d0d 10%,
+    /* Màu nền body (đậm ở dưới) */ rgba(13, 13, 13, 0) 100%
+      /* Trong suốt (ở trên) */
+  );
+  z-index: 3; /* Nằm TRÊN video (2) */
+  pointer-events: none; /* Cho phép click xuyên qua */
+}
+/* ================================== */
+
+.banner-content {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 90%;
+  z-index: 4; /* Nằm TRÊN lớp mờ (3) */
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.banner h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.banner p {
+  font-size: 15px;
+  color: #d3d3d3;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 18px;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.banner-content.content-hidden h2,
+.banner-content.content-hidden p {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.banner-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  transition: transform 0.5s ease-out;
+}
+
+.banner-content.content-hidden .banner-buttons {
+  transform: translateY(0px);
+}
+
+.btn-play {
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-play:hover {
+  background-color: #f40612;
+}
+
+.icon-btn {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon-btn.liked {
+  background-color: #2d88ff;
+  color: #fff;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 4; /* Nằm TRÊN lớp mờ (3) */
+  transition: 0.3s;
+}
+
+.nav-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-left {
+  left: 15px;
+}
+
+.nav-right {
+  right: 15px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4; /* Nằm TRÊN lớp mờ (3) */
+}
+
+.dot {
+  width: 20px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.dot.active {
+  background: #e50914;
+  width: 25px;
+}
+
+@media (max-width: 992px) {
+  .banner h2 {
+    font-size: 26px;
+  }
+  .banner p {
+    font-size: 14px;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .banner-content {
+    bottom: 30px;
+    width: 90%;
+  }
+  .banner h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  .banner p {
+    display: none;
+  }
+  .nav-arrow,
+  .dots {
+    display: none;
+  }
+  .banner-content.content-hidden h2 {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.khungchuaphim {
+  width: 100%;
+  height: 400px;
+  background-color: #0d0d0d;
+  margin-top: 20px;
+}

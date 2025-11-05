@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Form login -->
+    <div class="container active" id="loginForm">
+      <form>
+        <div class="form-box login">
+          <h1>Login</h1>
+          <div class="input-box">
+            <input type="text" placeholder="Username" required />
+            <i class="bx bxs-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="Password" required />
+            <i class="bx bxs-lock"></i>
+          </div>
+          <!-- <div class="forgot-link">
+                    <a href="#">Forgot password?</a>
+                </div> -->
+          <button type="submit" class="btn">Login</button>
+          <p class="optional-link">
+            Don't have an account? <a onclick="showRegister()">Register</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Form register -->
+    <div class="container" id="registerForm">
+      <form action="">
+        <div class="form-box register">
+          <h1>Register</h1>
+          <div class="input-box">
+            <input type="text" placeholder="Username" required />
+            <i class="bx bxs-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="email" placeholder="Email" required />
+            <i class="bx bxs-envelope"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="Password" required />
+            <i class="bx bxs-lock"></i>
+          </div>
+          <!-- <div class="forgot-link">
+                        <a href="#">Forgot password?</a>
+                </div> -->
+          <button type="submit" class="btn">Register</button>
+          <p class="optional-link">
+            Have an account? <a onclick="showLogin()">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function showRegister() {
+        document.getElementById("loginForm").classList.remove("active");
+        document.getElementById("registerForm").classList.add("active");
+      }
+
+      function showLogin() {
+        document.getElementById("registerForm").classList.remove("active");
+        document.getElementById("loginForm").classList.add("active");
+      }
+    </script>
+  </body>
+</html>

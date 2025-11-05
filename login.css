@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5)), url("/assets/background_login.jpg");
+}
+.container {
+    display: none;
+    background: rgb(127, 129, 126, 0.5);
+    width: 380px;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.container.active {
+    display: block;
+}
+
+.form-box {
+    /* background-color: rgb(209, 39, 39); */
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 40px;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid rgba(204, 76, 76, 0.3);
+}
+
+.container h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.input-box {
+    position: relative;
+    margin: 15px 0;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 13px 50px 13px 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.input-box input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.input-box input::placeholder {
+    color: #333;
+    font-size: 14px;
+}
+
+.input-box i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #888;
+}
+
+.forgot-link {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+}
+
+.forgot-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.btn {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    background: rgb(223, 60, 60);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn:focus {
+    background: rgb(211, 38, 38);
+}
+
+.optional-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.optional-link a {
+    color: white;
+    font-style: italic;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+/* @media (max-width: 768px) {
+    .container {
+        width: 90%;
+        margin: 0 20px;
+        border-radius: 20px;
+    }
+
+    .form-box {
+        padding: 25px 20px;
+    }
+
+    .container h1 {
+        font-size: 28px;
+    }
+
+    .btn {
+        font-size: 14px;
+        height: 38px;
+    }
+} */
+
+@media (max-width: 430px) {
+    body {
+        padding: 40px;
+    }
+
+    .container {
+        width: 100%;
+        /* box-shadow: none; */
+        background: rgba(127, 129, 126, 0.7);
+    }
+
+    .form-box {
+        padding: 30px 30px;
+    }
+
+    .container h1 {
+        font-size: 30px;
+    }
+
+    .input-box input {
+        padding: 12px 45px 12px 15px;
+        font-size: 14px;
+    }
+
+    .input-box i {
+        font-size: 18px;
+        right: 8px;
+    }
+
+    .btn {
+        font-size: 16px;
+        height: 36px;
+    }
+
+    .forgot-link,
+    .optional-link {
+        font-size: 14px;
+    }
+}

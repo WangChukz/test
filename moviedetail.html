@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết phim</title>
+  <style>
+    /* CSS CƠ BẢN */
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #e50914;
+    }
+
+    /* CSS CHO HERO SECTION (Giữ nguyên) */
+    .hero-container {
+      width: 100%;
+      background-color: #121212;
+      background-size: cover;
+      background-position: center top;
+      border-bottom: 1px solid #222;
+      padding: 50px 0;
+    }
+    .hero-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .hero-poster {
+      width: 300px;
+      height: 400px;
+      margin-top: 50px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .hero-info {
+      flex: 1;
+      padding-top: 20px;
+      margin-top: 50px;
+    }
+    .hero-info h1 {
+      font-size: 3rem;
+      margin: 0 0 15px 0;
+    }
+    .hero-overview {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.6;
+      max-width: 750px;
+      text-align: justify;
+      margin-bottom: 30px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .play-btn {
+      background-color: #e50914;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+      font-size: 0.9rem;
+    }
+    .play-btn:hover {
+      background-color: #f61b29;
+    }
+    .play-btn.disabled {
+      background-color: #e50914;
+      cursor: not-allowed;
+    }
+    .icon-btn {
+      background-color: rgba(100, 100, 100, 0.3);
+      border: 1px solid #555;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .icon-btn:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: #aaa;
+    }
+    /* KẾT THÚC CSS HERO SECTION */
+
+
+    /* ========================================================== */
+    /* CSS NỘI DUNG CHÍNH */
+    /* ========================================================== */
+    .main-content-wrapper {
+      display: flex;
+      flex-wrap: wrap; 
+      gap: 30px;
+      max-width: 1200px; /* Khớp với độ rộng của Hero section */
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Cột Sidebar bên trái */
+    .sidebar-info {
+      flex: 1;
+      min-width: 280px;
+      max-width: 300px; /* Cố định độ rộng cho sidebar */
+    }
+
+    /* Khu vực nội dung bên phải */
+    .tab-content-area {
+      flex: 2.5;
+      min-width: 300px; 
+    }
+
+    /* Khung thông tin (dùng cho sidebar) */
+    .info-box {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px; 
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+
+    .info-box p {
+      margin: 5px 0;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    /* Các thẻ tag (phụ đề, thể loại) */
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background-color: #333;
+      color: #ccc;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+    }
+    
+    /* Đánh giá IMDb */
+    .imdb-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .imdb-rating span {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f5c518;
+    }
+    .imdb-rating .stars {
+      font-size: 1.2rem;
+      color: #e50914;
+    }
+    
+    /* Thông tin đạo diễn */
+    .director {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .director img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .director p {
+      margin: 0;
+      font-size: 1rem;
+    }
+    .director p span {
+      font-size: 0.9rem;
+      color: #ccc;
+      display: block;
+    }
+
+    /* CSS CHO TAB NAVIGATION */
+    .tab-nav {
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid #333;
+      margin-bottom: 25px;
+    }
+
+    .tab-link {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 1.2rem;
+      padding: 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 3px solid transparent;
+      transition: 0.3s;
+    }
+    .tab-link:hover {
+      color: #fff;
+    }
+    .tab-link.active {
+      color: #fff;
+      border-bottom-color: #e50914;
+    }
+
+    /* CSS CHO CÁC KHUNG NỘI DUNG TAB */
+    .tab-panel {
+      display: none; /* Mặc định ẩn đi */
+      animation: fadeIn 0.5s;
+    }
+    .tab-panel.active {
+      display: block; /* Chỉ hiện khi active */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* CSS cho nội dung "Giới thiệu" */
+    .overview-text {
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.7;
+    }
+    
+    /* ========================================================== */
+    /* CSS PHẦN DIỄN VIÊN (ĐÃ CẬP NHẬT) */
+    /* ========================================================== */
+    .cast-grid {
+      display: grid;
+      /* Tăng độ rộng tối thiểu để thoáng hơn */
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+      gap: 20px;
+    }
+    .cast-member {
+      background-color: #1a1a1a;
+      border-radius: 8px;
+      text-align: center;
+      padding: 10px;
+      padding-bottom: 15px; /* Thêm đệm dưới */
+      overflow: hidden;
+    }
+    .cast-member img {
+      width: 100%;
+      height: 180px; /* Tăng chiều cao ảnh */
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .cast-member p {
+      font-weight: bold;
+      margin: 10px 0 5px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cast-member span {
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+    
+    /* CSS CHO PHẦN BÌNH LUẬN (Giữ nguyên) */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .comment-card {
+      display: flex;
+      gap: 15px;
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .comment-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .comment-body {
+      flex: 1;
+    }
+    .comment-username {
+      font-weight: bold;
+      color: #fff;
+      margin: 0 0 5px 0;
+    }
+    .comment-text {
+      margin: 0;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    /* Responsive cho di động */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .hero-poster {
+        width: 250px;
+        height: 375px;
+      }
+      .hero-info {
+        text-align: center;
+        padding-top: 0;
+      }
+      .hero-info h1 {
+        font-size: 2.2rem;
+      }
+      .hero-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .main-content-wrapper {
+          flex-direction: column;
+      }
+      .sidebar-info {
+          max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="movie-detail-container" id="movie-detail">
+    <p style="text-align: center; font-size: 1.5rem; margin-top: 50px;">Đang tải...</p>
+  </div>
+
+  <script src="scripts/moviedetail.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./scripts/loadHeaderFooter.js"></script>
+</body>
+</html>
